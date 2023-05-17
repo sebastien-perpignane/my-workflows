@@ -62,6 +62,6 @@ jobs:
 
       - name: Publish to GitHub Packages Apache Maven
         if: ${{ inputs.deploy-package }}
-        run: mvn -B deploy -DskipTests
+        run: mvn -B deploy
         env:
           GITHUB_TOKEN: ${{ github.token }}
