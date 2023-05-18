@@ -57,7 +57,7 @@ jobs:
         run: mvn -B test -DskipITs=true
 
       - name: Run integration test
-        if: ${{ inputs.skip-integration-tests == 'false' }}
+        if: ${{ inputs.skip-integration-tests == false }}
         run: mvn -B failsafe:integration-test
 
       - name: Package
