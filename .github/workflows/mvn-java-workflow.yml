@@ -45,7 +45,7 @@ jobs:
 
       - name: Force all maven dependencies download for caching
         if: ${{ steps.setup-java.outputs.cache-hit == 'false' }}
-        run: mvn -B dependency:go-offline dependency:resolve-plugins
+        run: mvn -B dependency:go-offline
 
       - name: Compile main code
         run: mvn -B compile -Dmaven.test.skip=true
