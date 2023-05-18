@@ -48,7 +48,7 @@ jobs:
           echo "cache-hit: ${{ steps.setup-java.outputs.cache-hit }}"
 
       - name: Force all maven dependencies download for caching
-        if: '!steps.setup-java.outputs.cache-hit'
+        if: steps.setup-java.outputs.cache-hit == false
         run: mvn -B dependency:go-offline
 
       - name: Compile main code
