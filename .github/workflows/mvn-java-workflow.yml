@@ -25,14 +25,14 @@ on:
 
 jobs:
 
-  build:
+  java-build:
     runs-on: ubuntu-latest
     env:
       # required to authenticate to GitHub mvn repo
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up JDK 17
@@ -57,7 +57,7 @@ jobs:
         run: mvn -B test -DskipITs=true
 
       - name: Run integration test
-        if: ${{ !inputs.skip-integration-tests }}
+        if: ${{ inputs.skip-integration-tests == 'false' }}
         run: mvn -B failsafe:integration-test
 
       - name: Package
