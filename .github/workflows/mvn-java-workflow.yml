@@ -40,8 +40,12 @@ jobs:
           distribution: ${{ inputs.distribution }}
           cache: maven
 
+      - name: Display setup outputs
+        run: |
+          echo ${{ join(steps.setup-java.outputs.*, ', ') }}
+
       - name: Force all maven dependencies download for caching
-        if: ${{ ! steps.setup-java.outputs.cache-hit }}
+        if: ${{ !steps.setup-java.outputs.cache-hit }}
         run: mvn -B dependency:go-offline
 
       - name: Compile main code
