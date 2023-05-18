@@ -40,6 +40,10 @@ jobs:
           distribution: ${{ inputs.distribution }}
           cache: maven
 
+      - name: Display maven settings
+        run: |
+          cat $HOME/.m2/settings.xml
+
       - name: Display setup outputs
         run: |
           echo ${{ join(steps.setup-java.outputs.*, ', ') }}
