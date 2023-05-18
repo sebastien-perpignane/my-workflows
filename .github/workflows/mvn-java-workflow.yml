@@ -28,6 +28,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      # required to authenticate to GitHub mvn repo
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -42,16 +43,12 @@ jobs:
           distribution: ${{ inputs.distribution }}
           cache: maven
 
-      - name: Display maven settings
-        run: |
-          cat $HOME/.m2/settings.xml
-
       - name: Display cache-hit value
         run: |
           echo "cache-hit: ${{ steps.setup-java.outputs.cache-hit }}"
 
       - name: Force all maven dependencies download for caching
-        if: ${{ !steps.setup-java.outputs.cache-hit }}
+        if: '!steps.setup-java.outputs.cache-hit'
         run: mvn -B dependency:go-offline
 
       - name: Compile main code
