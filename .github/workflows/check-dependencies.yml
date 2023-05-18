@@ -1,0 +1,45 @@
+name: Check maven dependency updates
+
+on:
+
+  workflow_call:
+    inputs:
+      java-version:
+        type: string
+        description: Required JDK version
+        required: true
+      distribution:
+        type: string
+        required: false
+        default: temurin
+
+jobs:
+
+  check-dependency-updates:
+    runs-on: ubuntu-latest
+    env:
+      # required to authenticate to GitHub mvn repo
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        id: setup-java
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ inputs.java-version }}
+          distribution: ${{ inputs.distribution }}
+          cache: maven
+
+      - name: Check dependencies
+        run: |
+          mvn -Dmaven.version.ignore='(.+-SNAPSHOT|.+-M\d),.+-(alpha|beta)' -Dversions.outputFile=updatable.txt versions:display-dependency-updates
+          nb_updatable_dependencies=$(cat updatable.txt | grep . | grep -v '^No dependencies' | wc -l)
+          if [[ $nb_updatable_dependencies -ne "0" ]]
+          then
+            cat updatable.txt | grep .
+            exit 1
+          fi
+          exit 0
