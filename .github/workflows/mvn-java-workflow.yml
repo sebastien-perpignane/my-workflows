@@ -43,24 +43,20 @@ jobs:
           distribution: ${{ inputs.distribution }}
           cache: maven
 
-      - name: Display cache-hit value
-        run: |
-          echo "cache-hit: ${{ steps.setup-java.outputs.cache-hit }}"
-
       - name: Force all maven dependencies download for caching
         if: ${{ steps.setup-java.outputs.cache-hit == 'false' }}
-        run: mvn -B dependency:go-offline
+        run: mvn -B dependency:go-offline dependency:resolve-plugins
 
       - name: Compile main code
         run: mvn -B compile -Dmaven.test.skip=true
 
-      - name: Compile main code
+      - name: Compile test code
         run: mvn -B test-compile
 
-      - name: Unit tests
+      - name: Run unit tests
         run: mvn -B test -DskipITs=true
 
-      - name: Integration test
+      - name: Run integration test
         if: ${{ !inputs.skip-integration-tests }}
         run: mvn -B failsafe:integration-test
 
