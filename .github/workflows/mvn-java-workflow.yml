@@ -61,4 +61,5 @@ jobs:
         run: mvn -B verify -Dskip.UT=true
 
       - name: Package
+        if: ${{ inputs.run-package == true }}
         run: mvn -B package -DskipTests=true
