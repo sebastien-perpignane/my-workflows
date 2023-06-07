@@ -11,17 +11,17 @@ on:
       distribution:
         type: string
         required: false
-        default: temurin
+        default: 'temurin'
       skip-integration-tests:
         type: boolean
         description: Allows to skip integration tests (can be useful when working on a feature branch)
         required: false
         default: false
-      deploy-package:
+      run-package:
         type: boolean
-        default: false
+        description: is running "mvn package" required ?
         required: false
-        description: 'Deploy or not ?'
+        default: false
 
 jobs:
 
@@ -54,11 +54,11 @@ jobs:
         run: mvn -B test-compile
 
       - name: Run unit tests
-        run: mvn -B test -DskipITs=true
+        run: mvn -B test -Dskip.IT=true
 
       - name: Run integration test
         if: ${{ inputs.skip-integration-tests == false }}
-        run: mvn -B failsafe:integration-test
+        run: mvn -B verify -Dskip.UT=true
 
       - name: Package
         run: mvn -B package -DskipTests=true
