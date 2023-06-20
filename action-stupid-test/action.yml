@@ -28,7 +28,7 @@ runs:
         }
         
         export harbor_user=seb
-        my_fn()
+        my_fn
         
         export harbor_user=jack
-        my_fn()
+        my_fn
