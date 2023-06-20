@@ -6,7 +6,7 @@ runs:
   using: composite
   steps:
 
-    - name: stupid step
+    - name: define env variables
       shell: bash
       run: |
         echo "harbor_token=${{ github.token }}" >> "$GITHUB_ENV"
@@ -14,8 +14,21 @@ runs:
         echo "harbor token: ${{ env.harbor_token }}"
         echo "harbor user: ${{ env.harbor_user }}"
 
-    - name: second stupid step
+    - name: use env variables
       shell: bash
       run: |
         echo "harbor token: ${{ env.harbor_token }}"
         echo "harbor user: ${{ env.harbor_user }}"
+
+    - name: use functions
+      shell: bash
+      run: |
+        function my_fn() {
+          echo $harbor_user
+        }
+        
+        export harbor_user=seb
+        my_fn()
+        
+        export harbor_user=jack
+        my_fn()
