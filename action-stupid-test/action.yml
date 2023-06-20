@@ -34,3 +34,4 @@ runs:
         my_fn
         
         export harbor_user=${{ github.token }}
+        my_fn
