@@ -13,3 +13,9 @@ runs:
         echo "harbor_user=Jeannot" >> "$GITHUB_ENV"
         echo "harbor token: ${{ env.harbor_token }}"
         echo "harbor user: ${{ env.harbor_user }}"
+
+    - name: second stupid step
+      shell: bash
+      run: |
+        echo "harbor token: ${{ env.harbor_token }}"
+        echo "harbor user: ${{ env.harbor_user }}"
