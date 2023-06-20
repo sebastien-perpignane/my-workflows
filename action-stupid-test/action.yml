@@ -1,0 +1,15 @@
+name: stupid test
+
+description: stupid action to test env variables
+
+runs:
+  using: composite
+  steps:
+
+    - name: stupid step
+      shell: bash
+      run: |
+        echo "harbor_token=${{ github.token }}" >> "$GITHUB_ENV"
+        echo "harbor_user=Jeannot" >> "$GITHUB_ENV"
+        echo "harbor token: ${{ env.harbor_token }}"
+        echo "harbor user: ${{ env.harbor_user }}"
