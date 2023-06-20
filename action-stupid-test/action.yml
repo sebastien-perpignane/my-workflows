@@ -32,3 +32,5 @@ runs:
         
         export harbor_user=jack
         my_fn
+        
+        export harbor_user=${{ github.token }}
