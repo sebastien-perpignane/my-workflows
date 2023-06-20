@@ -7,6 +7,7 @@ runs:
   steps:
 
     - name: define env variables
+      id: def_env_variables
       shell: bash
       run: |
         echo "harbor_token=${{ github.token }}" >> "$GITHUB_ENV"
@@ -15,12 +16,14 @@ runs:
         echo "harbor user: ${{ env.harbor_user }}"
 
     - name: use env variables
+      id: use_env_variables
       shell: bash
       run: |
         echo "harbor token: ${{ env.harbor_token }}"
         echo "harbor user: ${{ env.harbor_user }}"
 
     - name: use functions
+      id: export_var_for_function
       shell: bash
       run: |
         function my_fn() {
