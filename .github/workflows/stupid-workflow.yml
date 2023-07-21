@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        site: ${{ jobs.define_sites.outputs.sites }}
+        site: ${{ needs.define_sites.outputs.sites }}
     steps:
       - name: ${{ matrix.site }}
         shell: bash
