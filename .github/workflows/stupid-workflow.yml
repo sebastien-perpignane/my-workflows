@@ -16,11 +16,11 @@ jobs:
   truc:
     runs-on: ubuntu-latest
     needs: define_sites
-    strategy:
-      matrix:
-        site: ${{ needs.define_sites.outputs.sites }}
+    #strategy:
+      #matrix:
+        #site: ${{ needs.define_sites.outputs.sites }}
     steps:
-      - name: ${{ matrix.site }}
+      - name: poulet
         shell: bash
         run: |
-          echo ${{ matrix.site }}
+          echo ${{ needs.define_sites.outputs.sites }}
