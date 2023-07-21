@@ -17,9 +17,10 @@ jobs:
           sites=""
           for site in a b c
           do
-            sites="${sites} \"$site\","
+            sites="${sites} \"$site\""
           done
-          sites="[ $sites ]"
+          sites_array=($(echo "$sites"))
+          sites_json="[ $(IFS=',' ; echo "${sites_array[*]}") ]"
           echo "sites=$sites" >> "$GITHUB_OUTPUT"
 
   truc:
