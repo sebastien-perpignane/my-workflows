@@ -21,7 +21,7 @@ jobs:
           done
           sites_array=($(echo "$sites"))
           sites_json="[ $(IFS=',' ; echo "${sites_array[*]}") ]"
-          echo "sites=$sites" >> "$GITHUB_OUTPUT"
+          echo "sites=$sites_json" >> "$GITHUB_OUTPUT"
 
   truc:
     runs-on: ubuntu-latest
