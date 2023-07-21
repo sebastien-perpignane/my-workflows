@@ -21,7 +21,7 @@ jobs:
     needs: define_sites
     strategy:
       matrix:
-        site: ${{ needs.define_sites.outputs.sites }}
+        site: ${{ fromJSON(needs.define_sites.outputs.sites) }}
     steps:
       - name: poulet
         shell: bash
