@@ -19,7 +19,7 @@ jobs:
           do
             sites="${sites} \"$site\","
           done
-          sites="[ ${{$sites}} ]"
+          sites="[ $sites ]"
           echo "sites=$sites" >> "$GITHUB_OUTPUT"
 
   truc:
