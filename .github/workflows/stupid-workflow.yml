@@ -19,7 +19,9 @@ jobs:
           do
             sites="${sites} \"$site\""
           done
+          
           sites_array=($(echo "$sites"))
+          # write the elements of the bash array with ',' as separator (IFS = internal field separator)
           sites_json="[ $(IFS=',' ; echo "${sites_array[*]}") ]"
           echo "sites=$sites_json" >> "$GITHUB_OUTPUT"
 
@@ -28,7 +30,8 @@ jobs:
     needs: define_sites
     strategy:
       matrix:
-        site: ${{ fromJSON( needs.define_sites.outputs.sites) }}
+        #site: ${{ fromJSON( needs.define_sites.outputs.sites) }}
+        site: ${{ needs.define_sites.outputs.sites }}
     steps:
       - name: poulet
         shell: bash
