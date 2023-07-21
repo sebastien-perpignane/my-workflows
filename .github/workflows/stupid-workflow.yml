@@ -14,7 +14,13 @@ jobs:
         name: "coucou"
         id: coucou
         run: |
-          echo "sites=['a', 'b']" >> "$GITHUB_OUTPUT"
+          sites=""
+          for site in a b c
+          do
+            sites="${sites}, \"$site\""
+          done
+          sites="[ $sites ]"
+          echo "sites=$sites" >> "$GITHUB_OUTPUT"
 
   truc:
     runs-on: ubuntu-latest
