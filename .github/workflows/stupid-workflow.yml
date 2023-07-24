@@ -25,6 +25,12 @@ jobs:
           # write the elements of the bash array with ',' as separator (IFS = internal field separator)
           sites_json="[ $(IFS=',' ; echo "${sites_array[*]}") ]"
           echo "sites=$sites_json" >> "$GITHUB_OUTPUT"
+          
+          export file=myfile.txt
+          envsubst << EOF
+          echo erasing ${file}
+          EOF
+          
 
   deploy:
     runs-on: ubuntu-latest
