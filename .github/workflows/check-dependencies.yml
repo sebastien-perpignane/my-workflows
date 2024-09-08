@@ -39,7 +39,8 @@ jobs:
           nb_updatable_dependencies=$(cat updatable.txt | grep . | grep -v '^No dependencies' | wc -l)
           if [[ $nb_updatable_dependencies -ne "0" ]]
           then
+            echo "found updatables dependencies"
             cat updatable.txt | grep .
             exit 1
           fi
-          exit 0
+        exit 0
