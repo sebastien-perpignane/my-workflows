@@ -34,7 +34,6 @@ jobs:
           cache: maven
 
       - name: Check dependencies
-        shell: bash
         run: |
           mvn -Dmaven.version.ignore='(.+-SNAPSHOT|.+-M\d),.+-(alpha\d|beta\d|RC\d|rc\d)' -Dversions.outputFile=updatable.txt versions:display-dependency-updates
           nb_updatable_dependencies=$(cat updatable.txt | grep . | grep -v '^No dependencies' | wc -l)
