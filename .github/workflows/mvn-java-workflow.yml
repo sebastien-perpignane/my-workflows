@@ -61,7 +61,7 @@ jobs:
         run: mvn -B verify -Dskip.UT=true
 
       - name: Code quality analysis with SonarCloud
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar -DskipTests=true -
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar
 
       - name: Package
         if: ${{ inputs.run-package == true }}
