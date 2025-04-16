@@ -22,6 +22,11 @@ on:
         description: is running "mvn package" required ?
         required: false
         default: false
+      upload-artifact:
+        type: boolean
+        description: upload built project as artifact
+        default: false
+        required: false
 
 jobs:
 
@@ -63,3 +68,10 @@ jobs:
       - name: Package
         if: ${{ inputs.run-package == true }}
         run: mvn -B package -DskipTests=true
+
+      - name: Upload artifact
+        if: ${{ inputs.upload-artifact == true }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: java_project
+          path: ${{ github.workspace }}
